@@ -4,7 +4,7 @@ from rest_framework import status
 from .models import Course
 from .serializers import CourseSerializer
 
-
+# Adapted from Medium article "Setting Up a Django API with Django REST Framework (DRF): A Beginner’s Guide" by Michal Dróżdż
 class CourseView(APIView):
     def get(self, request):
         courses = Course.objects.all()
@@ -19,7 +19,8 @@ class CourseView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+    
+    # Adapted from patterns in Django REST Framework documentation
     def patch(self, request, pk=None):
         if not pk:
             return Response(
