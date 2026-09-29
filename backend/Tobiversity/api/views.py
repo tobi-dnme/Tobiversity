@@ -7,10 +7,21 @@ from .serializers import CourseSerializer, UserSerializer
 # Adapted from Medium article "Setting Up a Django API with Django REST Framework (DRF): A Beginner’s Guide" by Michal Dróżdż
 class CourseView(APIView):
 
-    def get(self, request):
-        courses = Course.objects.all()
-        serializer = CourseSerializer(courses, many=True)
-        return Response(serializer.data)
+    def get(self, request, pk=None):
+        if not pk:
+            courses = Course.objects.all()
+            serializer = CourseSerializer(courses, many=True)
+            return Response(serializer.data)
+
+        try:
+            course = Course.objects.get(pk=pk)
+            serializer = CourseSerializer(course)
+            return Response(serializer.data)
+        except Course.DoesNotExist:
+            return Response(
+                {"error": "Don't think we have that course here"}, 
+                status=status.HTTP_404_NOT_FOUND
+                )
 
     def post(self, request):
         serializer = CourseSerializer(data=request.data)
@@ -71,10 +82,21 @@ class CourseView(APIView):
 
 class UserView(APIView):
 
-    def get(self, request):
-        users = User.objects.all()
-        serializer = UserSerializer(users, many=True)
-        return Response(serializer.data)
+    def get(self, request, pk=None):
+        if not pk:
+            users = User.objects.all()
+            serializer = UserSerializer(users, many=True)
+            return Response(serializer.data)
+
+        try:
+            user = User.objects.get(pk=pk)
+            serializer = UserSerializer(user)
+            return Response(serializer.data)
+        except User.DoesNotExist:
+            return Response(
+                {"error": "That's not a real User"}, 
+                status=status.HTTP_404_NOT_FOUND
+                )
 
 
     def post(self, request):
