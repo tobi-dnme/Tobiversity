@@ -9,7 +9,7 @@ class Course(models.Model):
     def __str__(self):
         return self.title
 
-#Adapted from Django documentation: 'Customizing authentication in Django.'
+# Adapted from Django documentation: 'Customizing authentication in Django.'
 class User(AbstractUser):
 
     STUDENT = 'student'
@@ -32,6 +32,6 @@ class User(AbstractUser):
         Course,
         blank=True
     )
-    
+
     def __str__(self):
         return self.username
