@@ -216,3 +216,16 @@ class StudentCourseView(APIView):
         serializer = CourseSerializer(courses, many=True)
 
         return Response(serializer.data)
+
+
+
+class TeacherCourseView(APIView):
+
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, id):
+        courses = Course.objects.filter(teacher_id=id)
+
+        serializer = CourseSerializer(courses, many=True)
+
+        return Response(serializer.data)
