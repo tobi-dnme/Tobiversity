@@ -1,10 +1,20 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+
 class Course(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
     date_added = models.DateField(auto_now_add=True)
+
+    #Adapted from the open-source LMS implementation 'django_courseaffils' on GitHub.
+    teacher = models.ForeignKey(  
+    'User',
+    on_delete=models.SET_NULL,
+    null=True,
+    blank=True,
+    related_name='taught_courses'
+)
     
     def __str__(self):
         return self.title
