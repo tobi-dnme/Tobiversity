@@ -36,8 +36,8 @@ class CourseView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     
-    # Adapted from patterns in Django REST Framework documentation
     def patch(self, request, pk=None):
         if not pk:
             return Response(
@@ -117,7 +117,6 @@ class UserView(APIView):
 
 
     def patch(self, request, pk=None):
-
         if not pk:
             return Response(
                 {"error": "I'm gonna need your User ID"},
@@ -140,10 +139,8 @@ class UserView(APIView):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
     
     def delete(self, request, pk=None):
-
         if not pk:
             return Response(
                 {"error": "I'm gonna need your User ID"},
@@ -165,7 +162,7 @@ class UserView(APIView):
         )
 
 
-# Adapted from Django documentation: 'Customizing authentication in Django.'
+# Adapted from Medium article 'How to Implement Token-Based Authentication in Django REST Framework' by Samuel Getachew.
 class RegisterView(APIView):
 
     def post(self, request):
@@ -182,10 +179,10 @@ class RegisterView(APIView):
 
 
 
+# Adapted from Medium article 'How to Implement Token-Based Authentication in Django REST Framework' by Samuel Getachew.
 class LoginView(APIView):
 
     def post(self, request):
-
         username = request.data.get("username")
         password = request.data.get("password")
 
@@ -193,13 +190,29 @@ class LoginView(APIView):
 
         if user is not None:
             token, created = Token.objects.get_or_create(user=user)
-
             return Response({
                 "message": "Login successful",
                 "token": token.key
             })
-
         return Response(
             {"error": "Try again, User"},
             status=status.HTTP_400_BAD_REQUEST
         )
+
+
+# Adapted from Stack Overflow threads: 
+    # - Django filter based in joined table
+    # - Filtering data from joining table in Django by foreign key
+    # - How to efficiently clear nested many to many relationship in Django.
+class StudentCourseView(APIView):
+
+    permission_classes = [IsAuthenticated]  #From DRF Documentation — Authentication: Setting the authentication scheme
+    
+    def get(self, request, id):
+        joiner = User.courses.through.objects.filter(user_id=id)
+        course_ids = joiner.values_list('course_id', flat=True)
+        courses = Course.objects.filter(id__in=course_ids)
+
+        serializer = CourseSerializer(courses, many=True)
+
+        return Response(serializer.data)

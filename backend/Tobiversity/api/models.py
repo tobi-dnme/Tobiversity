@@ -9,7 +9,8 @@ class Course(models.Model):
     def __str__(self):
         return self.title
 
-# Adapted from Django documentation: 'Customizing authentication in Django.'
+# Adapted from Django documentation: 'Customizing authentication in Django.' ,
+# and Medium article 'User Management in Django' by Logesh Kumar.
 class User(AbstractUser):
 
     STUDENT = 'student'

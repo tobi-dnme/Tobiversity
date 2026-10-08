@@ -8,6 +8,7 @@ class CourseSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+# Adapted from DEV article 'Multi-Role User Authentication in Django Rest Framework' by Forhad Khan
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
