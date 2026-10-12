@@ -191,13 +191,28 @@ class LoginView(APIView):
         if user is not None:
             token, created = Token.objects.get_or_create(user=user)
             return Response({
-                "message": "Login successful",
+                "message": "Welcome back!",
                 "token": token.key
             })
         return Response(
             {"error": "Try again, User"},
             status=status.HTTP_400_BAD_REQUEST
         )
+
+
+
+# Adapted from DEV article 'How to Log Users Out in DRF' by Njoku Samson Ebere.
+class LogoutView(APIView):
+
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        request.user.auth_token.delete()
+        return Response(
+            {"message": "See you later, User!"},
+            status=status.HTTP_200_OK
+        )
+
 
 
 # Adapted from Stack Overflow threads: 
