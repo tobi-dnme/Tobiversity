@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .models import Course, User
 
 
+
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
@@ -21,8 +22,11 @@ class UserSerializer(serializers.ModelSerializer):
         user = User.objects.create_user(
             username=validated_data['username'],
             email=validated_data.get('email'),
-            password=validated_data['password']
+            password=validated_data['password'],
+            role=validated_data['role']
         )
+
+
 
         courses = validated_data.get('courses')
         if courses:

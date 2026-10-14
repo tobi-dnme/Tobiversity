@@ -166,7 +166,7 @@ class UserView(APIView):
 class RegisterView(APIView):
 
     def post(self, request):
-        serializer = UserSerializer(data=request.data)
+        serializer = UserSerializer(data=request.data, partial=True)
 
         if serializer.is_valid():
             serializer.save()
@@ -219,7 +219,7 @@ class LogoutView(APIView):
     # - Django filter based in joined table
     # - Filtering data from joining table in Django by foreign key
     # - How to efficiently clear nested many to many relationship in Django.
-class StudentCourseView(APIView):
+class StudentCourseView(APIView): # Using a ManyToMany relationship
 
     permission_classes = [IsAuthenticated]  #From DRF Documentation — Authentication: Setting the authentication scheme
     
@@ -234,7 +234,7 @@ class StudentCourseView(APIView):
 
 
 
-class TeacherCourseView(APIView): #
+class TeacherCourseView(APIView): # Using a ForeignKey relationship
 
     permission_classes = [IsAuthenticated]
 
