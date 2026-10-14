@@ -1,0 +1,12 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "database": "${workspaceFolder:lms_project}/backend/Tobiversity/db.sqlite3",
+            "name": "Django DB"
+        }
+    ],
+    "sqltools.useNodeRuntime": true,
+    "python-envs.defaultEnvManager": "ms-python.python:system"
+}
