@@ -234,7 +234,7 @@ class StudentCourseView(APIView):
 
 
 
-class TeacherCourseView(APIView):
+class TeacherCourseView(APIView): #
 
     permission_classes = [IsAuthenticated]
 
