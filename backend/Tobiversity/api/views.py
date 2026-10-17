@@ -6,11 +6,12 @@ from .serializers import CourseSerializer, UserSerializer
 from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated
+from .permissions import CoursePermission
 
 # Adapted from Medium article "Setting Up a Django API with Django REST Framework (DRF): A Beginner’s Guide" by Michal Dróżdż
 class CourseView(APIView): 
 
-    permission_classes = [IsAuthenticated]  #From DRF Documentation — Authentication: Setting the authentication scheme
+    permission_classes = [IsAuthenticated, CoursePermission]  #From DRF Documentation — Authentication: Setting the authentication scheme
 
     def get(self, request, pk=None):
         if not pk:
