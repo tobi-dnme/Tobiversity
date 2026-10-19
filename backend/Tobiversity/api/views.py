@@ -33,7 +33,10 @@ class CourseView(APIView):
         serializer = CourseSerializer(data=request.data)
 
         if serializer.is_valid():
-            serializer.save()
+            if request.user.has_perm("api.change_user"):
+                serializer.save()                       
+            else:
+                serializer.save(teacher=request.user)  
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -83,7 +86,7 @@ class CourseView(APIView):
         self.check_object_permissions(request, course)
 
         course.delete()
-        
+
         return Response(
             {"message": "Course deleted"},
             status=status.HTTP_204_NO_CONTENT
