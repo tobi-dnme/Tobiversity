@@ -204,6 +204,8 @@ class LoginView(APIView):
             token, created = Token.objects.get_or_create(user=user)
             return Response({
                 "message": "Welcome back!",
+                "role": user.role,
+                "id": user.pk,
                 "token": token.key
             })
         return Response(
