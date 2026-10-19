@@ -54,6 +54,8 @@ class CourseView(APIView):
                 status=status.HTTP_404_NOT_FOUND
             )
         
+        self.check_object_permissions(request, course)
+
         serializer = CourseSerializer(course, data=request.data, partial=True)
 
         if serializer.is_valid():
@@ -78,7 +80,10 @@ class CourseView(APIView):
                 status=status.HTTP_404_NOT_FOUND
             )
 
+        self.check_object_permissions(request, course)
+
         course.delete()
+        
         return Response(
             {"message": "Course deleted"},
             status=status.HTTP_204_NO_CONTENT
