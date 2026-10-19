@@ -6,7 +6,7 @@ from .serializers import CourseSerializer, UserSerializer
 from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated
-from .permissions import CoursePermission
+from .permissions import CoursePermission, UserPermission, IsSelfOrAdmin
 
 # Adapted from Medium article "Setting Up a Django API with Django REST Framework (DRF): A Beginner’s Guide" by Michal Dróżdż
 class CourseView(APIView): 
@@ -88,7 +88,7 @@ class CourseView(APIView):
 
 class UserView(APIView):
 
-    permission_classes = [IsAuthenticated]  #From DRF Documentation — Authentication: Setting the authentication scheme
+    permission_classes = [IsAuthenticated, UserPermission]  #From DRF Documentation — Authentication: Setting the authentication scheme
 
     def get(self, request, pk=None):
         if not pk:
@@ -222,7 +222,7 @@ class LogoutView(APIView):
     # - How to efficiently clear nested many to many relationship in Django.
 class StudentCourseView(APIView): # Using a ManyToMany relationship
 
-    permission_classes = [IsAuthenticated]  #From DRF Documentation — Authentication: Setting the authentication scheme
+    permission_classes = [IsAuthenticated, IsSelfOrAdmin]  #From DRF Documentation — Authentication: Setting the authentication scheme
     
     def get(self, request, id):
         joiner = User.courses.through.objects.filter(user_id=id)
