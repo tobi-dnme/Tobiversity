@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated
 from .permissions import CoursePermission, UserPermission, IsSelfOrAdmin
+from django.contrib.auth.models import Group
 
 # Adapted from Medium article "Setting Up a Django API with Django REST Framework (DRF): A Beginner’s Guide" by Michal Dróżdż
 class CourseView(APIView): 
@@ -177,8 +178,10 @@ class RegisterView(APIView):
     def post(self, request):
         serializer = UserSerializer(data=request.data, partial=True)
 
-        if serializer.is_valid():
-            serializer.save()
+        if serializer.is_valid(): # From Stack Overflow thread 'Add user to a group at signup in Django' 
+            user = serializer.save(role=User.STUDENT)
+            student_group = Group.objects.get(name="Student")
+            user.groups.add(student_group)
             return Response(
                 {"message": "Welcome aboard, User!"},
                 status=status.HTTP_201_CREATED
