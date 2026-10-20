@@ -1,0 +1,250 @@
+[
+{
+  "model": "auth.group",
+  "fields": {
+    "name": "Teacher",
+    "permissions": [
+      [
+        "add_course",
+        "api",
+        "course"
+      ],
+      [
+        "change_course",
+        "api",
+        "course"
+      ],
+      [
+        "delete_course",
+        "api",
+        "course"
+      ],
+      [
+        "view_course",
+        "api",
+        "course"
+      ]
+    ]
+  }
+},
+{
+  "model": "auth.group",
+  "fields": {
+    "name": "Student",
+    "permissions": [
+      [
+        "view_course",
+        "api",
+        "course"
+      ]
+    ]
+  }
+},
+{
+  "model": "auth.group",
+  "fields": {
+    "name": "Admin",
+    "permissions": [
+      [
+        "add_course",
+        "api",
+        "course"
+      ],
+      [
+        "change_course",
+        "api",
+        "course"
+      ],
+      [
+        "delete_course",
+        "api",
+        "course"
+      ],
+      [
+        "view_course",
+        "api",
+        "course"
+      ],
+      [
+        "add_user",
+        "api",
+        "user"
+      ],
+      [
+        "change_user",
+        "api",
+        "user"
+      ],
+      [
+        "delete_user",
+        "api",
+        "user"
+      ],
+      [
+        "view_user",
+        "api",
+        "user"
+      ]
+    ]
+  }
+},
+{
+  "model": "api.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1500000$Ljc6mKPK2bEsUUMHfV70nA$v0WOpSBZw+tuWfYpps1egtH2fA/g8GyItDC8+/mFWow=",
+    "last_login": "2026-10-02T07:51:04Z",
+    "is_superuser": true,
+    "username": "Tobi",
+    "first_name": "",
+    "last_name": "",
+    "email": "tobimanuelolu@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-10-02T08:25:05Z",
+    "role": "admin",
+    "groups": [
+      [
+        "Admin"
+      ]
+    ],
+    "user_permissions": [],
+    "courses": [
+      1,
+      2
+    ]
+  }
+},
+{
+  "model": "api.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1500000$nM2sgcB8aF7D4jHHRBSHpP$OAXkIpQMWNGRAO6lnj3LC/ePiXEyd6trGbsHtP+HPFg=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Decoy",
+    "first_name": "",
+    "last_name": "",
+    "email": "decoy@email.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-10-02T07:38:30Z",
+    "role": "student",
+    "groups": [
+      [
+        "Student"
+      ]
+    ],
+    "user_permissions": [],
+    "courses": [
+      1
+    ]
+  }
+},
+{
+  "model": "api.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1500000$47KVzlGY0qEa0Vj2W8IFwf$wEAoJszQD8dduYEiPBe1TOC4kd6yfTh2Ixv3QT+CMZA=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Sensei_Nathan",
+    "first_name": "",
+    "last_name": "",
+    "email": "nathan@email.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-10-02T08:25:05Z",
+    "role": "teacher",
+    "groups": [
+      [
+        "Teacher"
+      ]
+    ],
+    "user_permissions": [],
+    "courses": [
+      1,
+      2
+    ]
+  }
+},
+{
+  "model": "api.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1500000$NixhdqToE6GyHBLDG5taQI$EL6RBB+Kexr8rgszlSoDH1MXxiXGul6TXyf0YZLW66k=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "BurnerAccount",
+    "first_name": "",
+    "last_name": "",
+    "email": "burner@account.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-10-03T23:20:04Z",
+    "role": "student",
+    "groups": [
+      [
+        "Student"
+      ]
+    ],
+    "user_permissions": [],
+    "courses": []
+  }
+},
+{
+  "model": "api.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1500000$uA6YgZ0qzO9bnGf1mMxned$FN6f4dSqNyaNEeJPdG7bA+oOa6GIM21M4UXZQab//XQ=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Mr_Doe",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-10-14T11:56:02Z",
+    "role": "teacher",
+    "groups": [
+      [
+        "Teacher"
+      ]
+    ],
+    "user_permissions": [],
+    "courses": []
+  }
+},
+{
+  "model": "api.course",
+  "pk": 1,
+  "fields": {
+    "title": "History of Batman.",
+    "description": "This teaches the history of the caped crusader and his loyal butler, Alfred.",
+    "date_added": "2026-09-22",
+    "teacher": [
+      "Sensei_Nathan"
+    ]
+  }
+},
+{
+  "model": "api.course",
+  "pk": 2,
+  "fields": {
+    "title": "Star Trek vs Star Wars",
+    "description": "The age old argument over which is better. The answer is Dune.",
+    "date_added": "2026-09-22",
+    "teacher": [
+      "Mr_Doe"
+    ]
+  }
+},
+{
+  "model": "api.course",
+  "pk": 3,
+  "fields": {
+    "title": "The twisted mind of Quentin Tarantino",
+    "description": "Is Jackie Brown his best work? No, not even close.",
+    "date_added": "2026-10-19",
+    "teacher": [
+      "Mr_Doe"
+    ]
+  }
+}
+]
