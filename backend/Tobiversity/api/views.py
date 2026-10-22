@@ -183,7 +183,10 @@ class RegisterView(APIView):
             student_group = Group.objects.get(name="Student")
             user.groups.add(student_group)
             return Response(
-                {"message": "Welcome aboard, User!"},
+                {
+                    "message": "Welcome aboard, User!",
+                    "role": user.role
+                },
                 status=status.HTTP_201_CREATED
             )
 
