@@ -98,7 +98,7 @@ I ended up working with **two terminals open at all times**, and it saved me a l
 
 The server just sits in the external terminal and stays alive, so I can run tests, migrate and commit without ever having to stop it (or accidentally typing a command into the window that's running the server).
 
-![VSCode Terminal for running local commands](screenshots\vs_terminal.png)
+![VSCode Terminal for running local commands](screenshots/vs_terminal.png)
 
 ![External Terminal running the development server](screenshots/exterminal.png)
 ---
