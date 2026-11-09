@@ -3,16 +3,20 @@ import { createContext, useContext, useState } from "react";
 import type { ReactNode } from "react";
 import { login, logout } from "../api/auth";
 
-interface AuthUser {
-  id: number;
-  username: string;
-  role: string;
+type AuthUser = {
+  id: number,
+  username: string,
+  role: string
 }
 
-interface AuthContextType {
-  user: AuthUser | null;
-  signIn: (username: string, password: string) => Promise<void>;
-  signOut: () => Promise<void>;
+type AuthContextType = {
+  user: AuthUser | null,
+  signIn: (username: string, password: string) => Promise<void>,
+  signOut: () => Promise<void>
+}
+
+type AuthProviderProps = {
+  children: ReactNode
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -21,19 +25,29 @@ function getSavedUser(): AuthUser | null {
   const saved = localStorage.getItem("user");
   if (saved) {
     return JSON.parse(saved);
+  } else {
+    return null;
   }
-  return null;
 }
 
-export function AuthProvider({ children }: { children: ReactNode }) {
+function saveLogin(token: string, user: AuthUser) {
+  localStorage.setItem("token", token);
+  localStorage.setItem("user", JSON.stringify(user));
+}
+
+function clearLogin() {
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+}
+
+export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<AuthUser | null>(getSavedUser());
 
   async function signIn(username: string, password: string) {
     const data = await login(username, password);
     const loggedInUser = { id: data.id, username: username, role: data.role };
 
-    localStorage.setItem("token", data.token);
-    localStorage.setItem("user", JSON.stringify(loggedInUser));
+    saveLogin(data.token, loggedInUser);
     setUser(loggedInUser);
   }
 
@@ -41,10 +55,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       await logout();
     } catch (error) {
-      console.log("Logout request failed, logging out here anyway", error);
+      console.log("Logout request failed", error);
     }
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
+
+    clearLogin();
     setUser(null);
   }
 
@@ -57,8 +71,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
 export function useAuth() {
   const context = useContext(AuthContext);
+
   if (context === null) {
     throw new Error("useAuth must be used inside AuthProvider");
   }
+
   return context;
 }
