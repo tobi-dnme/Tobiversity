@@ -4,6 +4,7 @@ import type { Course } from "../types";
 
 export async function getCourses() {
   const response = await client.get<Course[]>("/courses/");
+  /* if response is not 200 ...*/ 
   return response.data;
 }
 

@@ -1,8 +1,9 @@
+import Header from "./components/Header";
+
 function App() {
   return (
     <main>
-      <h1>Tobiversity</h1>
-      <p>This should be fun :).</p>
+      <Header organisation="Tobiversity" name="Tobi" />
     </main>
   );
 }
