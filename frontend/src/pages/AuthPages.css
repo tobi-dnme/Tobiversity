@@ -1,0 +1,52 @@
+.auth-form {
+  width: 100%;
+  max-width: 450px;
+}
+
+.title {
+  font-size: 30px;
+  margin: 0 0 8px 0;
+}
+
+.subtitle {
+  color: #6b6b6b;
+  margin: 0 0 20px 0;
+}
+
+.form-label {
+  font-size: 14px;
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.form-input {
+  height: 40px;
+  width: 100%;
+  border-radius: 15px;
+}
+
+.submit-button {
+  height: 50px;
+  width: 100%;
+  margin-top: 24px;
+  background-color: #300000;
+  color: #ffffff;
+  border-radius: 15px;
+}
+
+.error-message {
+  margin-top: 16px;
+  padding: 8px 12px;
+  border: 1px dashed #808080;
+  border-radius: 6px;
+  color: #b91c1c;
+  font-size: 13px;
+  text-align: center;
+}
+
+.auth-switch {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 14px;
+}

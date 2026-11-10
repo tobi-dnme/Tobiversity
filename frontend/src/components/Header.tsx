@@ -1,3 +1,5 @@
+import "./styles/Header.css"
+
 type HeaderProps = {
     organisation: string,
     name: string
@@ -5,7 +7,7 @@ type HeaderProps = {
 
 function Header({ organisation, name }: HeaderProps) {
   return (
-    <div>
+    <div className="greeting">
       <h1>{organisation}</h1>
       <p>Hello {name}. This should be fun :).</p>
     </div>

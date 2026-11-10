@@ -1,0 +1,45 @@
+.auth-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.auth-left {
+  width: 41%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #300000;
+  padding: 30px;
+  text-align: center;
+}
+
+.auth-left p {
+    font-size: 16px;
+    color: #ffffff;
+    margin-top: 12px;
+}
+
+.auth-logo {
+  font-size: 28px;
+  margin: 0 0 12px 0;
+  color: #ffffff;
+}
+
+.auth-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+}
+
+.auth-image {
+  height: 450px;
+  width: 500px;
+  object-fit: cover;
+  background-position: 35% 30%;
+  background-image: linear-gradient(rgba(65, 0, 0, 0.4)), url('src/assets/images/ex.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
