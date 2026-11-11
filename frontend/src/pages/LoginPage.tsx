@@ -63,7 +63,7 @@ function LoginPage() {
         />
 
         <button
-          className="submit-button"
+          className="submit-button primary-button"
           type="submit"
           disabled={loading}
         >
@@ -72,7 +72,8 @@ function LoginPage() {
       </form>
 
       {error && <p className="error-message">{error}</p>}
-
+      
+      <br></br>
       <p className="auth-switch">
         No account yet? <Link to="/register">Register</Link>
       </p>

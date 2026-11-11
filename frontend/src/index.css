@@ -5,3 +5,46 @@ font-family: "Century Gothic", Arial, sans-serif;
 background-color: white;
 color: #1e1e1e;
 }
+
+* {
+  box-sizing: border-box;
+}
+
+.form-label {
+  display: block;
+  font-weight: bold;
+  font-size: 14px;
+  margin: 16px 0 6px 0;
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #808080;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.primary-button {
+  height: 50px;
+  padding: 0 20px;
+  background-color: #300000;
+  color: #ffffff;
+  border: none;
+  border-radius: 15px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.primary-button:hover:not(:disabled) {
+  background-color: #a70101;
+}
+
+.primary-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

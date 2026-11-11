@@ -96,7 +96,7 @@ function RegisterPage() {
         />
 
         <button
-          className="submit-button"
+          className="submit-button primary-button"
           type="submit"
           disabled={loading}
         >
