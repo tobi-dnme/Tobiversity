@@ -1,4 +1,4 @@
-import "./styles/WelcomeBanner.css";
+import "./comp-styles/WelcomeBanner.css";
 
 type WelcomeBannerProps = {
   user: string;

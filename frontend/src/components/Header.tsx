@@ -1,4 +1,4 @@
-import "./styles/Header.css"
+import "./comp-styles/Header.css"
 
 type HeaderProps = {
     organisation: string,

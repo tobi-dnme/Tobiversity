@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { getErrorMessage } from "../api/errors";
-import "./AuthPages.css";
+import "./page-styles/AuthPages.css";
 
 function LoginPage() {
   const { user, signIn } = useAuth();

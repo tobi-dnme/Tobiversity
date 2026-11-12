@@ -3,7 +3,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { register } from "../api/auth";
 import { getErrorMessage } from "../api/errors";
-import "./AuthPages.css";
+import "./page-styles/AuthPages.css";
 
 function RegisterPage() {
   const { user } = useAuth();

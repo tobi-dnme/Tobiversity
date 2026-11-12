@@ -1,7 +1,7 @@
 // Adapted from LogRocket's Guide to React Router Navigation by Aman Mittal
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import "./styles/Sidebar.css";
+import "./comp-styles/Sidebar.css";
 
 type NavType = {
   label: string,
