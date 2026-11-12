@@ -12,7 +12,7 @@ function App() {
     <main>
       <Header organisation="Tobiversity" name="Mr. User" />
       <WelcomeBanner user="Tobi" />
-      <BrowserRouter>
+      <BrowserRouter> {/* From LogRocket Tutorial 'How to use React Router v7 in React apps' */}
       <AuthProvider>
         <Routes>
           <Route element={<AuthLayout />}>

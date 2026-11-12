@@ -35,11 +35,13 @@
 }
 
 .auth-image {
-  height: 450px;
-  width: 500px;
+  width: 100%;
+  max-width: 500px;
+  aspect-ratio: 10 / 9;
   object-fit: cover;
   background-position: 35% 30%;
-  background-image: linear-gradient(rgba(65, 0, 0, 0.4)), url('src/assets/images/ex.jpg');
+  background-image: linear-gradient(rgba(65, 0, 0, 0.4), rgba(65, 0, 0, 0.4)), url('src/assets/images/ex.jpg');
   background-size: cover;
   background-repeat: no-repeat;
 }
+

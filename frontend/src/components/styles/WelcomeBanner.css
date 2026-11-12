@@ -4,8 +4,8 @@
   background-color: #e6e6e6;
   display: flex;
   align-items: center;
-  background-image: linear-gradient(rgba(65, 0, 0, 0.5)), 
-                    url('src/assets/images/ship.png');
+  background-image: linear-gradient(rgba(99, 58, 58, 0.7)), 
+                    url('src/assets/images/ship3.jpg');
   
   background-size: cover;
   background-position: center;
