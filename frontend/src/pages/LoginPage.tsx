@@ -1,22 +1,26 @@
-/* Adapted from LogRocket tutorial: Axios POST requests: Handling errors, authentication, and best practices */
+/* Adapted from LogRocket tutorial: Axios POST requests: Handling errors, authentication, and best practices 
+and the 'Navigating' Framework documentation on 'react-router.com'*/
 
-import { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { getErrorMessage } from "../api/errors";
 import "./page-styles/AuthPages.css";
 
 function LoginPage() {
   const { user, signIn } = useAuth();
+  const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  if (user) {
-    return <Navigate to="/dashboard" />;
-  }
+  useEffect(() => {
+    if (user !== null) {
+      navigate("/dashboard");
+    }
+  }, [user, navigate]);
 
   async function handleLogin() {
     setError("");
@@ -26,9 +30,8 @@ function LoginPage() {
       await signIn(username, password);
     } catch (error) {
       setError(getErrorMessage(error));
+      setLoading(false);
     }
-
-    setLoading(false);
   }
 
   return (

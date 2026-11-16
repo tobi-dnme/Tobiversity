@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { register } from "../api/auth";
 import { getErrorMessage } from "../api/errors";
@@ -16,9 +16,11 @@ function RegisterPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  if (user) {
-    return <Navigate to="/dashboard" />;
-  }
+  useEffect(() => {
+    if (user !== null) {
+      navigate("/dashboard");
+    }
+  }, [user, navigate]);
 
   async function handleRegister() {
     setError("");
@@ -32,12 +34,11 @@ function RegisterPage() {
 
     try {
       await register(username, email, password);
-      navigate("/login"); 
+      navigate("/login");
     } catch (error) {
       setError(getErrorMessage(error));
+      setLoading(false);
     }
-
-    setLoading(false);
   }
 
   return (

@@ -44,6 +44,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<AuthUser | null>(getSavedUser());
 
   async function signIn(username: string, password: string) {
+    console.log("Sign in")
     const data = await login(username, password);
     const loggedInUser = { id: data.id, username: username, role: data.role };
 
@@ -52,6 +53,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }
 
   async function signOut() {
+    console.log("Sign out")
     try {
       await logout();
     } catch (error) {
