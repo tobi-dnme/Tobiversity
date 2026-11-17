@@ -1,31 +1,38 @@
-import Header from "./components/Header";
-import WelcomeBanner from "./components/WelcomeBanner";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import AuthLayout from "./components/AuthLayout";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
-import TempDashboard from "./pages/Dashboard";
+import DashboardLayout from "./components/DashboardLayout";
+import DashboardPage from "./pages/DashboardPage";
+import ProtectedRoute from "./components/ProtectedRoute";
+import PlaceHolder from "./pages/PlaceHolder";
 
 function App() {
   return (
     <main>
-      <Header organisation="Tobiversity" name="Mr. User" />
-      <WelcomeBanner user="Tobi" />
       <BrowserRouter> {/* From LogRocket Tutorial 'How to use React Router v7 in React apps' */}
-      <AuthProvider>
-        <Routes>
-          <Route element={<AuthLayout />}>
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-          </Route>
+        <AuthProvider>
+          <Routes>
+            <Route element={<AuthLayout />}>
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/register" element={<RegisterPage />} />
+            </Route>
 
-          <Route path="/dashboard" element={<TempDashboard />} />
+            <Route element={<ProtectedRoute />}>
+              <Route element={<DashboardLayout />}>
+                <Route path="/dashboard" element={<DashboardPage />} />
+                <Route path="/my-courses" element={<PlaceHolder title="My Courses" />} />
+                <Route path="/courses" element={<PlaceHolder title="All Courses" />} />
+                <Route path="/courses/new" element={<PlaceHolder title="New Course" />} />
+                <Route path="/admin/users" element={<PlaceHolder title="Manage Users" />} />
+              </Route>
+            </Route>
 
-          <Route path="*" element={<Navigate to="/login" />} />
-        </Routes>
-      </AuthProvider>
-    </BrowserRouter>
+            <Route path="*" element={<Navigate to="/login" />} />
+          </Routes>
+        </AuthProvider>
+      </BrowserRouter>
     </main>
     
   );
