@@ -1,0 +1,19 @@
+.stat-tile {
+  width: 250px;
+  margin-top: 24px;
+  padding: 20px;
+  background-color: #300000;
+  border-radius: 10px;
+}
+
+.stat-value {
+  font-size: 32px;
+  font-weight: bold;
+  margin: 0;
+  color: #ffffff;
+}
+
+.stat-label {
+  margin: 4px 0 0 0;
+  color: #ffffff;
+}
