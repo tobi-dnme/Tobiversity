@@ -5,6 +5,9 @@ import { getErrorMessage } from "../api/errors";
 import type { Course } from "../types";
 import WelcomeBanner from "../components/WelcomeBanner";
 import StatCard from "../components/StatCard";
+import CourseDetails from "../components/CourseDetails";
+import { Link } from "react-router-dom";
+import "./page-styles/StudentDashboard.css";
 
 function StudentDashboard() {
   const { user } = useAuth();
@@ -46,13 +49,36 @@ function StudentDashboard() {
     }
   }
 
-  return (
+  function getRecentCourses() { {/* Adapted from Medium article 'How to Sort an Object Array by Date in JavaScript' by Tari Ibaba. */}
+    const newestFirst = [...courses].sort((a, b) => {
+      return new Date(b.date_added).getTime() - new Date(a.date_added).getTime();
+    });
+    return newestFirst.slice(0, 3);
+  }
+
+    return (
     <div>
       <h3>Dashboard</h3>
-      <WelcomeBanner user={String(user?.username)} />
-      <StatCard label="Courses enrolled" value={countCourses(myCourses)} />
-      <StatCard label="Courses available" value={countCourses(courses)} />
+      <WelcomeBanner user={String(user.username)} />
       {error && <p className="error-message">{error}</p>}
+
+      <div className="dashboard-columns">
+        <div className="recent-column">
+          <div className="section-header">
+            <h3 className="section-title">Recently Added Courses</h3>
+            <Link className="view-all-link" to="/courses">View All</Link>
+          </div>
+          {loading && <p>Loading courses...</p>}
+          {!loading && !error && <CourseDetails courses={getRecentCourses()} />}
+        </div>
+
+        <div className="glance-column">
+          <p className="section-title stat-tile-header">At a Glance</p>
+          <StatCard label="Courses enrolled" value={countCourses(myCourses)} />
+          <StatCard label="Courses available" value={countCourses(courses)} />
+        </div>
+
+      </div>
     </div>
   );
 }
