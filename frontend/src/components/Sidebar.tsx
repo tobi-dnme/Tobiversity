@@ -1,5 +1,5 @@
 // Adapted from LogRocket's Guide to React Router Navigation by Aman Mittal
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import "./comp-styles/Sidebar.css";
 
@@ -49,7 +49,7 @@ function Sidebar() {
 
   return (
     <nav className="sidebar">
-      <h2 className="sidebar-logo">Tob!vers!ty</h2>
+      <h2 className="sidebar-logo"><Link to="/dashboard" className="logo-link">Tob!vers!ty</Link></h2>
 
       {links.map((link) => (
         <NavLink key={link.path} to={link.path} end className="sidebar-link sidebar-button">

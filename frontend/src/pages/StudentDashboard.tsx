@@ -8,6 +8,7 @@ import StatCard from "../components/StatCard";
 import CourseDetails from "../components/CourseDetails";
 import { Link } from "react-router-dom";
 import "./page-styles/StudentDashboard.css";
+import SearchBar from "../components/SearchBar";
 
 function StudentDashboard() {
   const { user } = useAuth();
@@ -58,9 +59,14 @@ function StudentDashboard() {
 
     return (
     <div>
-      <h3>Dashboard</h3>
+      <div className="dashboard-header">
+        <h3>Dashboard</h3>
+        <SearchBar />
+      </div>
+
       <WelcomeBanner user={String(user.username)} />
       {error && <p className="error-message">{error}</p>}
+
 
       <div className="dashboard-columns">
         <div className="recent-column">

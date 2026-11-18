@@ -11,6 +11,11 @@
   color: #ffffff;
 }
 
+.logo-link {
+  color: #ffffff;
+  text-decoration: none;
+}
+
 .sidebar-link {
   display: block;
   width: 100%;
