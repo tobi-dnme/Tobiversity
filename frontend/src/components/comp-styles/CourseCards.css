@@ -1,0 +1,37 @@
+.course-cards {
+  display: flex;
+  gap: 16px;
+  border-bottom: 1px solid #300000;
+}
+
+.course-card {
+  flex: 1;
+  max-width: 25%;
+}
+
+.course-card-title {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  border: 2px solid #300000;
+  border-radius: 8px;
+  padding: 8px;
+  align-items: center;
+  text-align: center;
+  background-color: #300000;
+  color: #ffffff;
+}
+
+.course-card-image{
+  background-image: linear-gradient(rgba(99, 58, 58, 0.1), rgba(175, 0, 0, 0.4)),
+                    url('src/assets/images/brain.jpg');
+  width: 100%;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  display: block;
+  margin-bottom: 32px;
+  object-fit: cover;
+  border: 2px solid #300000;
+  border-radius: 8px;
+  
+}

@@ -9,6 +9,7 @@ import CourseDetails from "../components/CourseDetails";
 import { Link } from "react-router-dom";
 import "./page-styles/StudentDashboard.css";
 import SearchBar from "../components/SearchBar";
+import CourseCards from "../components/CourseCards";
 
 function StudentDashboard() {
   const { user } = useAuth();
@@ -30,6 +31,7 @@ function StudentDashboard() {
     try {
       const courseData = await getCourses();
       const myCourseData = await getStudentCourses(userId);
+
       setCourses(courseData);
       setMyCourses(myCourseData);
     } catch (error) {
@@ -50,9 +52,9 @@ function StudentDashboard() {
     }
   }
 
-  function getRecentCourses() { {/* Adapted from Medium article 'How to Sort an Object Array by Date in JavaScript' by Tari Ibaba. */}
-    const newestFirst = [...courses].sort((a, b) => {
-      return new Date(b.date_added).getTime() - new Date(a.date_added).getTime();
+  function getRecentCourses(courseList: Course[]) { {/* Adapted from Medium article 'How to Sort an Object Array by Date in JavaScript' by Tari Ibaba. */}
+    const newestFirst = [...courseList].sort((a, b) => {
+      return Math.abs(new Date(b.date_added).getTime() - new Date(a.date_added).getTime());
     });
     return newestFirst.slice(0, 3);
   }
@@ -66,7 +68,14 @@ function StudentDashboard() {
 
       <WelcomeBanner user={String(user.username)} />
       {error && <p className="error-message">{error}</p>}
-
+      
+      <div className="current-courses">
+        <div className="section-header">
+          <h3 className="section-title">Currently Running Courses</h3>
+          <Link className="view-all-link" to="/my-courses">View All</Link>
+        </div>
+        <CourseCards courses={courses} />
+      </div>
 
       <div className="dashboard-columns">
         <div className="recent-column">
@@ -75,7 +84,7 @@ function StudentDashboard() {
             <Link className="view-all-link" to="/courses">View All</Link>
           </div>
           {loading && <p>Loading courses...</p>}
-          {!loading && !error && <CourseDetails courses={getRecentCourses()} />}
+          {!loading && !error && <CourseDetails courses={getRecentCourses(courses)} />}
         </div>
 
         <div className="glance-column">
