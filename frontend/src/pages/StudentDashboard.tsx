@@ -74,7 +74,7 @@ function StudentDashboard() {
           <h3 className="section-title">Currently Running Courses</h3>
           <Link className="view-all-link" to="/my-courses">View All</Link>
         </div>
-        <CourseCards courses={courses} />
+        {!loading && !error && <CourseCards courses={getRecentCourses(courses)} />}
       </div>
 
       <div className="dashboard-columns">

@@ -5,8 +5,8 @@ type CourseCardProps = {
 };
 
 function TextLimit(text: string) {
-  if (text.length > 25) {
-    return text.slice(0, 25).trim() + "...";
+  if (text.length > 20) {
+    return text.slice(0, 20).trim() + "...";
   } else {
     return text;
   }

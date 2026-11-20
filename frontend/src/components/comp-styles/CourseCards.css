@@ -11,7 +11,7 @@
 
 .course-card-title {
   margin: 0 0 8px 0;
-  font-size: 16px;
+  font-size: 14px;
   border: 2px solid #300000;
   border-radius: 8px;
   padding: 8px;
@@ -25,7 +25,7 @@
   background-image: linear-gradient(rgba(99, 58, 58, 0.1), rgba(175, 0, 0, 0.4)),
                     url('src/assets/images/brain.jpg');
   width: 100%;
-  height: 200px;
+  height: 130px;
   background-size: cover;
   background-position: center;
   display: block;
