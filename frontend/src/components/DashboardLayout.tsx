@@ -1,7 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import "./comp-styles/DashboardLayout.css";
-import ProfileSection from "./ProfileSection";
 
 function DashboardLayout() {
   return (
@@ -10,7 +9,6 @@ function DashboardLayout() {
       <main className="main-area">
         <Outlet />
       </main>
-      <ProfileSection />
     </div>
   );
 }

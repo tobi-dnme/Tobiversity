@@ -1,7 +1,6 @@
 .profile-section {
   width: 250px;
   padding: 30px 20px;
-  border-left: 1px solid #300000;
 }
 
 .profile-top {
@@ -29,10 +28,10 @@
 .profile-calendar {
   display: block;
   width: 90%;
-  height: 150px;
+  height: 200px;
   margin-bottom: 32px;
-  background-image: url('src/assets/images/calendar.jpg');
-  background-size: 110%;
+  background-image: url('src/assets/images/calendar.png');
+  background-size: cover;
   background-position: center;
   align-items: center;
 }

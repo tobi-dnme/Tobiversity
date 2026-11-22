@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import "./page-styles/StudentDashboard.css";
 import SearchBar from "../components/SearchBar";
 import CourseCards from "../components/CourseCards";
+import ProfileSection from "../components/ProfileSection";
 
 function StudentDashboard() {
   const { user } = useAuth();
@@ -60,40 +61,46 @@ function StudentDashboard() {
   }
 
     return (
-    <div>
-      <div className="dashboard-header">
-        <h3>Dashboard</h3>
-        <SearchBar />
-      </div>
-
-      <WelcomeBanner user={String(user.username)} />
-      {error && <p className="error-message">{error}</p>}
-      
-      <div className="current-courses">
-        <div className="section-header">
-          <h3 className="section-title">Currently Running Courses</h3>
-          <Link className="view-all-link" to="/my-courses">View All</Link>
-        </div>
-        {!loading && !error && <CourseCards courses={getRecentCourses(courses)} />}
-      </div>
-
-      <div className="dashboard-columns">
-        <div className="recent-column">
-          <div className="section-header">
-            <h3 className="section-title">Recently Added Courses</h3>
-            <Link className="view-all-link" to="/courses">View All</Link>
+      <div className="student-dashboard">
+        <div className="main-content">
+          <div className="dashboard-header">
+            <h3>Dashboard</h3>
+            <SearchBar />
           </div>
-          {loading && <p>Loading courses...</p>}
-          {!loading && !error && <CourseDetails courses={getRecentCourses(courses)} />}
+
+          <WelcomeBanner user={String(user.username)} />
+          {error && <p className="error-message">{error}</p>}
+      
+          <div className="current-courses">
+            <div className="section-header">
+              <h3 className="section-title">Currently Running Courses</h3>
+              <Link className="view-all-link" to="/my-courses">View All</Link>
+            </div>
+            {loading && <p>Loading courses...</p>}
+            {!loading && !error && <CourseCards courses={getRecentCourses(courses)} />}
+          </div>
+
+          <div className="dashboard-columns">
+            <div className="recent-column">
+              <div className="section-header">
+                <h3 className="section-title">Recently Added Courses</h3>
+                <Link className="view-all-link" to="/courses">View All</Link>
+              </div>
+              {loading && <p>Loading courses...</p>}
+              {!loading && !error && <CourseDetails courses={getRecentCourses(courses)} />}
+            </div>
+
+            <div className="glance-column">
+              <p className="section-title stat-tile-header">At a Glance</p>
+              <StatCard label="Courses enrolled" value={countCourses(myCourses)} />
+              <StatCard label="Courses available" value={countCourses(courses)} />
+            </div>
+          </div>
         </div>
 
-        <div className="glance-column">
-          <p className="section-title stat-tile-header">At a Glance</p>
-          <StatCard label="Courses enrolled" value={countCourses(myCourses)} />
-          <StatCard label="Courses available" value={countCourses(courses)} />
+        <div className="profile">
+          <ProfileSection />
         </div>
-
-      </div>
     </div>
   );
 }
