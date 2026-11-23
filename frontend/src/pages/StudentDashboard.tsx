@@ -77,7 +77,7 @@ function StudentDashboard() {
               <Link className="view-all-link" to="/my-courses">View All</Link>
             </div>
             {loading && <p>Loading courses...</p>}
-            {!loading && !error && <CourseCards courses={getRecentCourses(courses)} />}
+            {!loading && !error && <CourseCards courses={getRecentCourses(myCourses)} />}
           </div>
 
           <div className="dashboard-columns">

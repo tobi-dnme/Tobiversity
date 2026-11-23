@@ -1,0 +1,55 @@
+.all-course-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.all-course-card-title {
+  font-size: 16px;
+}
+
+.all-course-card-description {
+  padding: 12px;
+  font-size: 14px;
+}
+
+.all-course-card-image {
+  background-image: linear-gradient(rgba(99, 58, 58, 0.1), rgba(175, 0, 0, 0.4)),
+                    url('src/assets/images/brain.jpg');
+  width: 100%;
+  height: 130px;
+  padding: 12px;
+  box-sizing: border-box;
+  background-size: cover;
+  background-position: center;
+  display: block;
+  margin-bottom: 32px;
+  border: 2px solid #300000;
+  border-radius: 8px;
+}
+
+.enrolled-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  background-color: #300000;
+  color: #ffffff;
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+.all-enrol-button {
+  width: 100px;
+  height: 32px;
+  border-radius: 8px;
+  color: #ffffff;
+  background-color: #300000;
+  border: 2px solid #300000;
+  cursor: pointer;
+}
+
+.all-enrol-button:hover:not(:disabled) {
+  background-color: #a70101;
+  border-color: #a70101;
+  color: white;
+  font-weight: bold;
+}

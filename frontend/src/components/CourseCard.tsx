@@ -1,7 +1,5 @@
-import type { Course } from "../types";
-
 type CourseCardProps = {
-  course: Course;
+  title: string;
 };
 
 function TextLimit(text: string) {
@@ -12,10 +10,10 @@ function TextLimit(text: string) {
   }
 }
 
-function CourseCard({ course }: CourseCardProps) {
+function CourseCard({ title }: CourseCardProps) {
   return (
     <div className="course-card">
-      <h4 className="course-card-title">{TextLimit(course.title)}</h4>
+      <h4 className="course-card-title">{TextLimit(title)}</h4>
       <div className="course-card-image"></div>
     </div>
   );

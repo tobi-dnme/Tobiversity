@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { getStudentCourses } from "../api/courses";
 import { getErrorMessage } from "../api/errors";
 import type { Course } from "../types"
+import { Link } from "react-router-dom";
 
 function MyCourses() {
   const { user } = useAuth();
@@ -51,10 +52,12 @@ function MyCourses() {
 
       <br></br><br></br>
 
-      <div className="enrol">
-        <p>+</p>
-        <p>Enrol in a new course.</p>
-      </div>
+      <Link to="/courses" className="enrol-link">
+        <div className="enrol">
+          <p>+</p>
+          <p>Enrol in a new course.</p>
+        </div>
+      </Link>
     </div>
   );
 }

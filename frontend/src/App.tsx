@@ -7,6 +7,7 @@ import DashboardLayout from "./components/DashboardLayout";
 import StudentDashboard from "./pages/StudentDashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import MyCourses from "./pages/MyCourses";
+import AllCourses from "./pages/AllCourses";
 import PlaceHolder from "./pages/PlaceHolder";
 
 function App() {
@@ -24,7 +25,7 @@ function App() {
               <Route element={<DashboardLayout />}>
                 <Route path="/dashboard" element={<StudentDashboard />} />
                 <Route path="/my-courses" element={<MyCourses />} />
-                <Route path="/courses" element={<PlaceHolder title="All Courses" />} />
+                <Route path="/courses" element={<AllCourses />} />
                 <Route path="/courses/new" element={<PlaceHolder title="New Course" />} />
                 <Route path="/admin/users" element={<PlaceHolder title="Manage Users" />} />
               </Route>

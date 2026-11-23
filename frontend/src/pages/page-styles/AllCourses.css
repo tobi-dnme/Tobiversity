@@ -1,0 +1,52 @@
+.all-courses-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 12px;
+  margin: 16px 0 24px 0;
+}
+
+.filter-button {
+  padding: 6px 20px;
+  background-color: #ffffff;
+  color: #300000;
+  border: 2px solid #300000;
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.filter-button:hover {
+  background-color: #f5e6e6;
+}
+
+.filter-active {
+  background-color: #300000;
+  color: #ffffff;
+}
+
+.filter-active:hover {
+  background-color: #a70101;
+  border-color: #a70101;
+}
+
+.search-notice {
+  font-size: 14px;
+  color: #6b6b6b;
+  margin-bottom: 16px;
+}
+
+.search-notice a {
+  color: #300000;
+  font-weight: bold;
+}
+
+.error-message {
+  color: #a70101;
+  font-size: 14px;
+}

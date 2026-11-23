@@ -16,7 +16,7 @@ function CourseCards({ courses }: CourseCardsProps) {
       {courses.map((course) => (
         <CourseCard 
           key={course.id} 
-          course={course} />
+          title={course.title} />
       ))}
     </div>
   );
