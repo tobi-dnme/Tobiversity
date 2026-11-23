@@ -18,6 +18,7 @@ function MyCourseCards({ courses }: MyCourseCardsProps) {
           key={course.id}
           title={course.title}
           description={course.description}
+          id={course.id}
         />
       ))}
     </div>

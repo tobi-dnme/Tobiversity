@@ -9,7 +9,7 @@ import CourseDetails from "../components/CourseDetails";
 import { Link } from "react-router-dom";
 import "./page-styles/StudentDashboard.css";
 import SearchBar from "../components/SearchBar";
-import CourseCards from "../components/CourseCards";
+import CurrentCourseCards from "../components/CurrentCourseCards";
 import ProfileSection from "../components/ProfileSection";
 
 function StudentDashboard() {
@@ -77,7 +77,7 @@ function StudentDashboard() {
               <Link className="view-all-link" to="/my-courses">View All</Link>
             </div>
             {loading && <p>Loading courses...</p>}
-            {!loading && !error && <CourseCards courses={getRecentCourses(myCourses)} />}
+            {!loading && !error && <CurrentCourseCards courses={getRecentCourses(myCourses)} />}
           </div>
 
           <div className="dashboard-columns">

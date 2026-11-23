@@ -8,6 +8,7 @@ import StudentDashboard from "./pages/StudentDashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import MyCourses from "./pages/MyCourses";
 import AllCourses from "./pages/AllCourses";
+import CourseDetailsPage from "./pages/CourseDetailsPage";
 import PlaceHolder from "./pages/PlaceHolder";
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
                 <Route path="/courses" element={<AllCourses />} />
                 <Route path="/courses/new" element={<PlaceHolder title="New Course" />} />
                 <Route path="/admin/users" element={<PlaceHolder title="Manage Users" />} />
+                <Route path="/courses/:id" element={<CourseDetailsPage />} />
               </Route>
             </Route>
 

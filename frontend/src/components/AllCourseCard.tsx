@@ -1,7 +1,10 @@
+import { Link } from "react-router-dom";
+
 type AllCourseCardProps = {
   title: string;
   description: string;
   enrolled: boolean;
+  id: number;
 };
 
 function TextLimit(text: string, limit: number) {
@@ -12,7 +15,7 @@ function TextLimit(text: string, limit: number) {
   }
 }
 
-function AllCourseCard({ title, description, enrolled }: AllCourseCardProps) {
+function AllCourseCard({ title, description, enrolled, id }: AllCourseCardProps) {
   return (
     <div className="all-course-card">
       <div className="all-course-card-image">
@@ -21,7 +24,7 @@ function AllCourseCard({ title, description, enrolled }: AllCourseCardProps) {
       <h4 className="all-course-card-title">{TextLimit(title, 40)}</h4>
       <p className="all-course-card-description">{TextLimit(description, 90)}</p>
       <div className="enrol-buttons">
-        <button className="open-button">View</button>
+        <Link to={"/courses/" + id + "/"}><button className="open-button">View</button></Link>
         {enrolled && <button className="unenroll-button">Leave</button>}
         {!enrolled && <button className="all-enrol-button">Enrol</button>}
       </div>

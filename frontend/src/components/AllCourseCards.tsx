@@ -20,6 +20,7 @@ function AllCourseCards({ courses, enrolledIds }: AllCourseCardsProps) {
           title={course.title}
           description={course.description}
           enrolled={enrolledIds.includes(course.id)}
+          id={course.id}
         />
       ))}
     </div>

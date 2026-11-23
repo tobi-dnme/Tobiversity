@@ -7,6 +7,7 @@
 .course-card {
   flex: 1;
   max-width: 25%;
+  text-decoration: none;
 }
 
 .course-card-title {
@@ -34,4 +35,8 @@
   border: 2px solid #300000;
   border-radius: 8px;
   
+}
+
+.course-card-link{
+  text-decoration: none;
 }
