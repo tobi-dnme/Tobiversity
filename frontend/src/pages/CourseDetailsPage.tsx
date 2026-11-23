@@ -19,18 +19,18 @@ function CourseDetailsPage() {
   useEffect(() => {
     if (!user?.id || !id) return;
 
-    const userId = user.id;
     const courseId = Number(id);
+    const userId = user.id;
 
     async function loadCourse() {
       try {
         const courseData = await getCourse(courseId);
+        setCourse(courseData);
 
         const myCourseData = await getStudentCourses(userId);
         const myCourseIds = myCourseData.map((myCourse) => myCourse.id);
-
-        setCourse(courseData);
         setEnrolled(myCourseIds.includes(courseId));
+
       } catch (error) {
         setError(getErrorMessage(error));
       }
@@ -116,7 +116,20 @@ function CourseDetailsPage() {
           </div>
         }
 
-        {canManage && 
+        {
+          user.role == "teacher" && course.teacher !== user.id &&
+            <div className="enrol-panel">
+              <h4 className="panel-title">You can not manage this course</h4>
+              <div className="manage-buttons">
+                <button className="manage-button" disabled>Edit</button>
+                <button className="manage-button" disabled>Delete</button>
+              </div>
+            </div>
+
+        }
+
+        {
+          canManage && 
             <div className="enrol-panel">
               <h4 className="panel-title">Manage this course</h4>
               <div className="manage-buttons">
