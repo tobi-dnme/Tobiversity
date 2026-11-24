@@ -82,7 +82,7 @@ function StudentDashboard() {
 
           <div className="dashboard-columns">
             <div className="recent-column">
-              <div className="section-header">
+              <div className="recent-header">
                 <h3 className="section-title">Recently Added Courses</h3>
                 <Link className="view-all-link" to="/courses">View All</Link>
               </div>

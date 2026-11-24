@@ -1,0 +1,44 @@
+.manage-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-heading {
+  padding: 12px 16px;
+  background-color: #300000;
+  text-align: left;
+  font-size: 14px;
+  color: #ffffff;
+}
+
+.table-cell {
+  padding: 14px 16px;
+  border-bottom: 1px solid #cccccc;
+  font-size: 14px;
+}
+
+.row-button {
+  margin-right: 8px;
+  padding: 4px 16px;
+  background-color: white;
+  color: #1e1e1e;
+  border: 2px solid #1e1e1e;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.row-button:hover {
+  background-color: #a70101;
+  color: white;
+}
+
+.table-note {
+  font-size: 13px;
+  color: #6b6b6b;
+}
+
+.course-link {
+    text-decoration: none;
+    color: inherit;
+}

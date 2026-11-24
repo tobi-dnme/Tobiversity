@@ -1,17 +1,26 @@
 import { useAuth } from "../context/AuthContext";
 import "./comp-styles/ProfileSection.css";
+import TeacherPanelStats from "./TeacherPanelStats";
 
 type TodoProps = {
   text: string;
   done: boolean;
 };
 
-const todoItems: TodoProps[] = [
+const studentTodos: TodoProps[] = [
   { text: "Write your README file", done: true },
   { text: "Book a session with mentor", done: false },
   { text: "Stick to the brief", done: true },
   { text: "Prepare questions for meeting", done: false },
   { text: "Review feedback", done: false },
+];
+
+const teacherTodos: TodoProps[] = [
+  { text: "Review course description", done: true },
+  { text: "Update Module 3 notes", done: false },
+  { text: "Mark the latest assignments", done: true },
+  { text: "Publish new course", done: false },
+  { text: "Reply to student questions", done: false },
 ];
 
 function ProfileSection() {
@@ -23,6 +32,11 @@ function ProfileSection() {
 
   const avatar = user.username.charAt(0).toUpperCase();
 
+  let todoItems = studentTodos;
+  if (user.role === "teacher") {
+    todoItems = teacherTodos;
+  }
+
   return (
     <div className="profile-section">
       <div className="profile-top">
@@ -33,7 +47,7 @@ function ProfileSection() {
       <br></br>
       <br></br>
 
-      <div className="profile-calendar"></div>
+      {user.role === "teacher" ? <TeacherPanelStats /> : <div className="profile-calendar"></div>}
 
       <br></br>
       <br></br>

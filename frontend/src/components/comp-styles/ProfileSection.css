@@ -62,3 +62,34 @@
   margin-bottom: 12px;
   font-size: 12px;
 }
+
+.teacher-stats {
+  margin-bottom: 32px;
+}
+
+.quick-actions-title {
+  margin: 24px 0 12px 0;
+  font-size: 16px;
+}
+
+.quick-new-button,
+.quick-browse-button {
+  display: block;
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 10px;
+  border: 2px solid #1e1e1e;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.quick-new-button {
+  background-color: #1e1e1e;
+  color: white;
+}
+
+.quick-browse-button {
+  background-color: white;
+  color: #1e1e1e;
+}

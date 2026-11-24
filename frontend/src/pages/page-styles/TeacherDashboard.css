@@ -1,0 +1,61 @@
+.main {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  width: 100%;
+}
+
+.main > div:first-child {
+  flex: 1;
+  min-width: 0;
+}
+
+.profile {
+  flex-shrink: 0;
+  width: 250px; 
+  position: sticky;
+  top: 0;
+}
+
+.manage-section {
+  margin-top: 24px;
+}
+
+.new-course-button {
+  padding: 10px 24px;
+  background-color: #300000;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.quick-new-button {
+  background-color: #300000;
+}
+
+.quick-new-button:hover {
+  background-color: #a70101;
+  color: white;
+}
+
+.quick-browse-button:hover {
+  background-color: #a70101;
+  color: white;
+}
+
+.new-course-button:hover {
+  background-color: #a70101;
+  color: white;
+}
+
+.running-section {
+  margin-top: 32px;
+}
+
+.section-header {
+  margin-top: 32px;
+  margin-bottom: 16px;
+}

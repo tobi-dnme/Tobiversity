@@ -27,6 +27,11 @@
   min-width: 0;
 }
 
+.recent-header {
+  display: flex;
+  justify-content: space-between
+}
+
 .glance-column {
   flex: 1;
   min-width: 0;
