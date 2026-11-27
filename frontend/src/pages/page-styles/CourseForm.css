@@ -1,0 +1,87 @@
+.course-form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.course-form-columns {
+  display: flex;
+  gap: 32px;
+}
+
+.course-form-main {
+  flex: 2;
+}
+
+.course-form-side {
+  flex: 1;
+  padding-left: 32px;
+  border-left: 1px solid #cccccc;
+}
+
+.char-count {
+  margin: 4px 0 24px 0;
+  text-align: right;
+  font-size: 13px;
+  color: #6b6b6b;
+}
+
+.form-textarea {
+  height: 200px;
+  font-family: inherit;
+  resize: vertical;
+}
+
+.teacher-row-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-note {
+  font-size: 13px;
+  font-style: italic;
+  color: #6b6b6b;
+}
+
+.form-note {
+  margin: 8px 0 24px 0;
+  font-size: 13px;
+  font-style: italic;
+  color: #6b6b6b;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.cancel-link {
+  display: inline-block;
+  padding: 12px 32px;
+  border: 2px solid #1e1e1e;
+  border-radius: 8px;
+  color: #1e1e1e;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+.preview-title {
+  margin: 0 0 16px 0;
+  font-size: 18px;
+}
+
+.preview-note {
+  font-size: 13px;
+  font-style: italic;
+  color: #6b6b6b;
+}
+
+.view-link {
+  text-decoration: none;
+  color: #300000;
+  font-weight: bold;
+}

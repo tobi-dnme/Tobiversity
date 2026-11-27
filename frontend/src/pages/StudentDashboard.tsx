@@ -99,8 +99,8 @@ function StudentDashboard() {
 
   function getRecentCourses(courseList: Course[]) { {/* Adapted from Medium article 'How to Sort an Object Array by Date in JavaScript' by Tari Ibaba. */}
     const newestFirst = [...courseList].sort((a, b) => {
-      return Math.abs(new Date(b.date_added).getTime() - new Date(a.date_added).getTime());
-    });
+        return b.id - a.id;
+      });
     return newestFirst.slice(0, 3);
   }
 

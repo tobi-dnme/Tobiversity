@@ -43,3 +43,19 @@ export async function getTeacherCourses(teacherId: number) {
     throw new Error("ERROR " + response.status + ": Sorry Teacher, couldn't get your courses");
   }
 }
+
+export async function createCourse( title: string, description: string, teacherId: number | null ) {
+  const response = await client.post<Course>("/courses/", {
+    title: title,
+    description: description,
+    teacher: teacherId,
+  });
+
+  if (response.status === 201) {
+    return response.data;
+  } else {
+    throw new Error(
+      "Could not create the course (status " + response.status + ")"
+    );
+  }
+}

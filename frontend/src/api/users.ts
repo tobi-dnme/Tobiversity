@@ -15,9 +15,7 @@ async function saveCourseIds(userId: number, courseIds: number[]) {
     if (response.status === 200) {
         return response.data
     } else {
-        throw new Error(
-          "Could not update your courses (status " + response.status + ")"
-        ); 
+        throw new Error("Could not update your courses (status " + response.status + ")" ); 
     }
 }
 
@@ -37,4 +35,14 @@ export async function leaveCourse(userId: number, courseId: number) {
   const newIds = currentIds.filter((id) => id !== courseId);
 
   return saveCourseIds(userId, newIds);
+}
+
+export async function getUsers() {
+  const response = await client.get<User[]>("/users/");
+
+  if (response.status === 200) {
+    return response.data;
+  } else {
+    throw new Error("Could not load users (status " + response.status + ")");
+  }
 }

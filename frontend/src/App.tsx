@@ -10,6 +10,7 @@ import MyCourses from "./pages/MyCourses";
 import AllCourses from "./pages/AllCourses";
 import CourseDetailsPage from "./pages/CourseDetailsPage";
 import PlaceHolder from "./pages/PlaceHolder";
+import CourseForm from "./pages/CourseForm";
 
 function App() {
   return (
@@ -27,7 +28,7 @@ function App() {
                 <Route path="/dashboard" element={<DashboardPage />} />
                 <Route path="/my-courses" element={<MyCourses />} />
                 <Route path="/courses" element={<AllCourses />} />
-                <Route path="/courses/new" element={<PlaceHolder title="New Course" />} />
+                <Route path="/courses/new" element={<CourseForm />} />
                 <Route path="/admin/users" element={<PlaceHolder title="Manage Users" />} />
                 <Route path="/courses/:id" element={<CourseDetailsPage />} />
               </Route>
