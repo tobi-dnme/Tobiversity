@@ -1,41 +1,91 @@
 import "./page-styles/MyCourses.css";
 import SearchBar from "../components/SearchBar";
 import MyCourseCards from "../components/MyCourseCards";
+import Confirmation from "../components/Confirmation";
 import { useAuth } from "../context/AuthContext";
 import { useState, useEffect } from "react";
-import { getStudentCourses } from "../api/courses";
+import { getStudentCourses, getTeacherCourses } from "../api/courses";
+import { leaveCourse } from "../api/users";
 import { getErrorMessage } from "../api/errors";
-import type { Course } from "../types"
+import type { Course } from "../types";
 import { Link } from "react-router-dom";
 
 function MyCourses() {
   const { user } = useAuth();
-  if (!user) {
-    return null
-  }
 
-  const [myCourses, setMyCourses] = useState<Course[]>([])
+  const [myCourses, setMyCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [saving, setSaving] = useState(false);
+  const [actionError, setActionError] = useState("");
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [changedTitle, setChangedTitle] = useState("");
 
   useEffect(() => {
-  if (!user?.id) return;
+    if (!user?.id) return;
 
-  const userId = user.id;
+    const userId = user.id;
+    const role = user.role;
 
-  async function loadCourses() {
-    try {
-      const myCourseData = await getStudentCourses(userId);
+    async function loadCourses() {
+      try {
+        let courseData: Course[] = [];
 
-      setMyCourses(myCourseData);
-    } catch (error) {
-      setError(getErrorMessage(error));
+        if (role === "teacher") {
+          courseData = await getTeacherCourses(userId);
+        } else {
+          courseData = await getStudentCourses(userId);
+        }
+
+        setMyCourses(courseData);
+      } catch (error) {
+        setError(getErrorMessage(error));
+      }
+      setLoading(false);
     }
-    setLoading(false);
+
+    loadCourses();
+  }, [user?.id, user?.role]);
+
+  async function handleLeaveClick(courseId: number) {
+    if (!user || saving) {
+      return;
+    }
+
+    const course = myCourses.find((item) => item.id === courseId);
+    if (!course) {
+      return;
+    }
+
+    setSaving(true);
+    setActionError("");
+
+    try {
+      await leaveCourse(user.id, courseId);
+
+      const myCourseData = await getStudentCourses(user.id);
+      setMyCourses(myCourseData);
+
+      setChangedTitle(course.title);
+      setShowConfirmation(true);
+    } catch (err) {
+      setActionError(getErrorMessage(err));
+    }
+
+    setSaving(false);
   }
 
-  loadCourses();
-}, [user?.id]);
+  const isTeacher = user?.role === "teacher";
+  const isStudent = user?.role === "student";
+
+  let sectionTitle = "My Enrolled Courses";
+  let linkPath = "/courses";
+  let linkText = "Enrol in a new course.";
+  if (isTeacher) {
+    sectionTitle = "Courses I Teach";
+    linkPath = "/courses/new";
+    linkText = "Add a new course.";
+  }
 
   return (
     <div className="my-courses-page">
@@ -46,18 +96,35 @@ function MyCourses() {
 
       <br></br>
 
-      <h3 className="section-title">My Enrolled Courses</h3>
+      <h3 className="section-title">{sectionTitle}</h3>
       {loading && <p>Loading courses...</p>}
-      {!loading && !error && <MyCourseCards courses={myCourses} />}
+      {error && <p className="error-message">{error}</p>}
+      {actionError && <p className="error-message">{actionError}</p>}
+      {!loading && !error && (
+        <MyCourseCards
+          courses={myCourses}
+          canLeave={isStudent}
+          onLeaveClick={handleLeaveClick}
+        />
+      )}
 
-      <br></br><br></br>
+      <br></br>
+      <br></br>
 
-      <Link to="/courses" className="enrol-link">
+      <Link to={linkPath} className="enrol-link">
         <div className="enrol">
           <p>+</p>
-          <p>Enrol in a new course.</p>
+          <p>{linkText}</p>
         </div>
       </Link>
+
+      {showConfirmation && (
+        <Confirmation
+          joined={false}
+          courseTitle={changedTitle}
+          onClose={() => setShowConfirmation(false)}
+        />
+      )}
     </div>
   );
 }

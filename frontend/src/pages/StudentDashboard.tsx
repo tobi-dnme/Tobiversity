@@ -11,6 +11,8 @@ import "./page-styles/StudentDashboard.css";
 import SearchBar from "../components/SearchBar";
 import CurrentCourseCards from "../components/CurrentCourseCards";
 import ProfileSection from "../components/ProfileSection";
+import { enrolInCourse, leaveCourse } from "../api/users";
+import Confirmation from "../components/Confirmation";
 
 function StudentDashboard() {
   const { user } = useAuth();
@@ -22,6 +24,11 @@ function StudentDashboard() {
   const [myCourses, setMyCourses] = useState<Course[]>([])
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [saving, setSaving] = useState(false);
+  const [actionError, setActionError] = useState("");
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [joined, setJoined] = useState(false);
+  const [changedTitle, setChangedTitle] = useState("");
 
   useEffect(() => {
   if (!user?.id) return;
@@ -51,6 +58,43 @@ function StudentDashboard() {
     } else {
       return String(courseList.length);
     }
+  }
+
+  const myCourseIds = myCourses.map((course) => course.id);
+
+  async function handleEnrolClick(courseId: number) {
+    if (!user || saving) {
+      return;
+    }
+
+    const course = courses.find((item) => item.id === courseId);
+    if (!course) {
+      return;
+    }
+
+    const alreadyEnrolled = myCourseIds.includes(courseId);
+
+    setSaving(true);
+    setActionError("");
+
+    try {
+      if (alreadyEnrolled) {
+        await leaveCourse(user.id, courseId);
+      } else {
+        await enrolInCourse(user.id, courseId);
+      }
+
+      const myCourseData = await getStudentCourses(user.id);
+      setMyCourses(myCourseData);
+
+      setJoined(!alreadyEnrolled);
+      setChangedTitle(course.title);
+      setShowConfirmation(true);
+    } catch (error) {
+      setActionError(getErrorMessage(error));
+    }
+
+    setSaving(false);
   }
 
   function getRecentCourses(courseList: Course[]) { {/* Adapted from Medium article 'How to Sort an Object Array by Date in JavaScript' by Tari Ibaba. */}
@@ -87,7 +131,10 @@ function StudentDashboard() {
                 <Link className="view-all-link" to="/courses">View All</Link>
               </div>
               {loading && <p>Loading courses...</p>}
-              {!loading && !error && <CourseDetails courses={getRecentCourses(courses)} />}
+              {actionError && <p className="error-message">{actionError}</p>}
+              {!loading && !error && <CourseDetails courses={getRecentCourses(courses)}
+                                                    enrolledIds={myCourseIds}
+                                                    onEnrolClick={handleEnrolClick} />}
             </div>
 
             <div className="glance-column">
@@ -101,6 +148,14 @@ function StudentDashboard() {
         <div className="profile">
           <ProfileSection />
         </div>
+
+        {showConfirmation && (
+          <Confirmation
+            joined={joined}
+            courseTitle={changedTitle}
+            onClose={() => setShowConfirmation(false)}
+        />
+      )}
     </div>
   );
 }

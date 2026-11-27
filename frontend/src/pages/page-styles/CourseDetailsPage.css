@@ -41,10 +41,11 @@
 
 .status {
   padding: 4px 16px;
-  background-color: #e6e6e6;
+  background-color: #300000;
   border-radius: 16px;
   font-size: 13px;
   font-weight: bold;
+  color: #ffffff;
 }
 
 .course-details-columns {

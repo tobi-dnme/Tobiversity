@@ -3,7 +3,7 @@ import { createContext, useContext, useState } from "react";
 import type { ReactNode } from "react";
 import { login, logout } from "../api/auth";
 
-type AuthUser = {
+export type AuthUser = {
   id: number,
   username: string,
   role: string

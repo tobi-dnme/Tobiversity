@@ -1,7 +1,10 @@
 type CourseDetailProps = {
+  id: number;
   title: string;
   dateAdded: string;
   description: string;
+  enrolled: boolean;
+  onEnrolClick: (courseId: number) => void;
 };
 
 function TextLimit(text: string) {
@@ -13,8 +16,13 @@ function TextLimit(text: string) {
 }
 
 
-function CourseDetail({ title, dateAdded, description }: CourseDetailProps) {
+function CourseDetail({ id, title, dateAdded, description, enrolled, onEnrolClick }: CourseDetailProps) {
   const addedOn = new Date(dateAdded).toLocaleDateString("en-GB")
+
+  let buttonText = "Enrol";
+  if (enrolled) {
+    buttonText = "Leave";
+  }
 
   return (
     <div className="course-detail-container">
@@ -24,8 +32,8 @@ function CourseDetail({ title, dateAdded, description }: CourseDetailProps) {
         <p className="course-detail-description">{TextLimit(description)}</p>
       </div>
 
-      <button className="enrol-button" type="button">
-        Enrol
+      <button className="enrol-button" type="button" onClick={() => onEnrolClick(id)}>
+        {buttonText}
       </button>
     </div>
   );

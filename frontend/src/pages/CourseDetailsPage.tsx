@@ -6,6 +6,8 @@ import { useAuth } from "../context/AuthContext";
 import { getCourse, getStudentCourses } from "../api/courses";
 import { getErrorMessage } from "../api/errors";
 import type { Course } from "../types";
+import { enrolInCourse, leaveCourse } from "../api/users";
+import Confirmation from "../components/Confirmation";
 
 function CourseDetailsPage() {
   const { user } = useAuth();
@@ -15,6 +17,9 @@ function CourseDetailsPage() {
   const [enrolled, setEnrolled] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [saving, setSaving] = useState(false);
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [actionError, setActionError] = useState("");
 
   useEffect(() => {
     if (!user?.id || !id) return;
@@ -62,6 +67,30 @@ function CourseDetailsPage() {
     canManage = true;
   }
 
+  async function handleEnrolClick() {
+    if (!user || !course) {
+      return;
+    }
+
+    setSaving(true);
+    setActionError("");
+
+    try {
+      if (enrolled) {
+        await leaveCourse(user.id, course.id);
+        setEnrolled(false);
+      } else {
+        await enrolInCourse(user.id, course.id);
+        setEnrolled(true);
+      }
+      setShowConfirmation(true);
+    } catch (error) {
+      setActionError(getErrorMessage(error));
+    }
+
+    setSaving(false);
+  }
+
  
   return (
     <div className="course-details-page">
@@ -82,9 +111,7 @@ function CourseDetailsPage() {
       <div className="course-details-data">
         <span>Added {addedOn}</span>
         {isStudent && enrolled && <span className="status">Enrolled</span>}
-        {isStudent && !enrolled && (
-          <span className="status">Not enrolled</span>
-        )}
+        {isStudent && !enrolled && <span className="status">Not enrolled</span>}
       </div>
 
       <div className="course-details-columns">
@@ -93,7 +120,6 @@ function CourseDetailsPage() {
           <p className="course-details-description">{course.description}</p>
         </div>
 
-    
 
         <div className="course-details-side">
           {
@@ -101,7 +127,7 @@ function CourseDetailsPage() {
           <div className="enrol-panel">
             <h4 className="panel-title">You are enrolled</h4>
               <p className="panel-text">You can find this course in My Courses.</p>
-              <button className="enrol-now-button">Leave course</button>
+              <button className="enrol-now-button" onClick={handleEnrolClick}>{saving ? "Saving..." : "Leave course"}</button>
               <p className="panel-note">Students can leave at any time.</p>
           </div>
         }
@@ -111,7 +137,7 @@ function CourseDetailsPage() {
           <div className="enrol-panel">
             <h4 className="panel-title">Enrol in this course</h4>
               <p className="panel-text">You are not enrolled yet.</p>
-              <button className="enrol-now-button">Enrol now</button>
+              <button className="enrol-now-button" onClick={handleEnrolClick}>{saving ? "Saving..." : "Enrol now"}</button>
               <p className="panel-note">Students can leave at any time.</p>
           </div>
         }
@@ -125,7 +151,6 @@ function CourseDetailsPage() {
                 <button className="manage-button" disabled>Delete</button>
               </div>
             </div>
-
         }
 
         {
@@ -138,6 +163,16 @@ function CourseDetailsPage() {
               </div>
             </div>
         }
+
+        {actionError && <p className="error-message">{actionError}</p>}
+
+        {showConfirmation && (
+        <Confirmation
+          joined={enrolled}
+          courseTitle={course.title}
+          onClose={() => setShowConfirmation(false)}
+        />
+      )}
         </div>
       </div>
     </div>
